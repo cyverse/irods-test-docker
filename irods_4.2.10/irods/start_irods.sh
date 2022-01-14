@@ -35,7 +35,7 @@ sed -i "s/%%ICAT_IPADDR%%/${ICAT_IPADDR}/" /tmp/irods_config.json
 sed -i "s/%%ICAT_HOSTNAME%%/${ICAT_HOSTNAME}/" /tmp/irods_config.json
 
 echo "Waiting for DB"
-sleep 10
+/wait-for-it.sh -h ${POSTGRES_HOSTNAME} -p 5432 -t 60
 
 echo "Setting up iRODS"
 python /var/lib/irods/scripts/setup_irods.py --json_configuration_file=/tmp/irods_config.json

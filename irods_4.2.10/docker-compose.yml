@@ -6,6 +6,11 @@ services:
     restart: always
     expose:
       - 5432
+    healthcheck:
+      test: /usr/bin/pg_isready
+      interval: 1s
+      timeout: 10s
+      retries: 120
     environment:
       POSTGRESQL_PASSWORD: "irods_pass"
       POSTGRESQL_USER: "irods"

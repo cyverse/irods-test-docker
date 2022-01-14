@@ -20,7 +20,7 @@ RUN rpm --import https://packages.irods.org/irods-signing-key.asc && \
 ### Installing undocumented dependency, unixODBC
     yum --assumeyes install unixODBC && \
 ### Install iRODS management script dependencies
-    yum --assumeyes install jq sysvinit-tools net-tools && \
+    yum --assumeyes install jq sysvinit-tools net-tools nc && \
 ### Clear yum cache for smaller image
     yum --assumeyes clean all && \
     rm --force --recursive /var/cache/yum
@@ -28,6 +28,12 @@ RUN rpm --import https://packages.irods.org/irods-signing-key.asc && \
 ### Copy Configuration File
 ADD ./irods_config.json /tmp/irods_config.json
 RUN chown irods:irods /tmp/irods_config.json
+
+### Copy Wait-for-it
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
+    /wait-for-it.sh
+RUN chown irods:irods /wait-for-it.sh && \
+    chmod ug+x /wait-for-it.sh
 
 ### Copy Start Script
 ADD ./start_irods.sh /start_irods.sh
