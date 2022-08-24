@@ -5,13 +5,18 @@ ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_x
   /usr/local/bin/dumb-init
 RUN chmod +x /usr/local/bin/dumb-init
 
+### Install python dependency
+RUN yum --assumeyes install epel-release && \
+    yum --assumeyes install python-pip && \
+    pip install distro
+
 ### Install iRODS
 ADD https://packages.irods.org/renci-irods.yum.repo /etc/yum.repos.d/renci-irods.yum.repo
 RUN rpm --import https://packages.irods.org/irods-signing-key.asc && \
     rpmkeys --import file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 && \
     yum --assumeyes install epel-release && \
     rpmkeys --import file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 && \
-    yum --assumeyes install irods-server-4.2.10 && \
+    yum --assumeyes install irods-server-4.2.11 && \
     yum --assumeyes install irods-database-plugin-postgres && \
     mkdir /var/lib/irods/.irods && \
     adduser --system --comment 'iRODS Administrator' --home-dir /var/lib/irods --shell /bin/bash \
