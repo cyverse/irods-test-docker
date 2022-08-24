@@ -43,4 +43,4 @@ export DOCKER_DB_VOLUME=db_volume
 export LOCAL_IRODS_VOLUME_PATH=/opt/irods-docker-deploy/irods_volume
 export LOCAL_DB_VOLUME_PATH=/opt/irods-docker-deploy/db_volume
 
-export IRODS_VER="4.2.10"
+export IRODS_VER="4.2.8"
