@@ -44,8 +44,6 @@ ARG IRODS_ZONE_NAME=tempZone
 ARG IRODS_ADMIN_PASSWORD=rods
 ARG IRODS_ZONE_PORT=1247
 ARG IRODS_ADMIN_USER=rods
-ARG IRODS_MAX_NUM_RE_PROCS=4
-ARG IRODS_MOUNT_PATH=
 
 ### Configure ODBC and iRODS
 COPY irods_4.2.8/scripts/config-irods.sh /tmp/config-irods

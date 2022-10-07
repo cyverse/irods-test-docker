@@ -43,8 +43,6 @@ services:
         IRODS_ZONE_PORT: "$IRODS_ZONE_PORT"
         IRODS_ADMIN_USER: "$IRODS_ADMIN_USER"
         IRODS_ADMIN_PASSWORD: "$IRODS_ADMIN_PASSWORD"
-        IRODS_MAX_NUM_RE_PROCS: "$IRODS_MAX_NUM_RE_PROCS"
-        IRODS_MOUNT_PATH: "$IRODS_MOUNT_PATH"
     image: "cyverse/irods-test:v$IRODS_VER"
     hostname: "$IRODS_CONF_HOST"
     ports:

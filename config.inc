@@ -26,21 +26,10 @@ export IRODS_SYSTEM_GROUP=irods
 export IRODS_SYSTEM_USER=irods
 export IRODS_ZONE_PORT=1247
 export IRODS_DEFAULT_RESOURCE="$IRODS_RES_CONF_NAME"
-export IRODS_MAX_NUM_RE_PROCS=4
 
 export IRODS_ADMIN_USER=rods
 export IRODS_ADMIN_PASSWORD=test_rods_password
 
 export IRODS_CONF_HOST="$ENV_NAME"_irods_1."$DOMAIN"
-
-export IRODS_PORT="$IRODS_ZONE_PORT"
-export IRODS_ZONE="$IRODS_ZONE_NAME"
-
-export IRODS_MOUNT_PATH=/irods_mount
-
-export DOCKER_IRODS_VOLUME=irods_volume
-export DOCKER_DB_VOLUME=db_volume
-export LOCAL_IRODS_VOLUME_PATH=/opt/irods-docker-deploy/irods_volume
-export LOCAL_DB_VOLUME_PATH=/opt/irods-docker-deploy/db_volume
 
 export IRODS_VER="4.2.8"

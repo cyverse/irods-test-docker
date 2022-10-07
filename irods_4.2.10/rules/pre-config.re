@@ -14,7 +14,3 @@ _ipc_rmTrash {}
 ipc_rescheduleTrashRemoval {
   delay('<PLUSET>0s</PLUSET><EF>1h REPEAT FOR EVER</EF>') {_ipc_rmTrash};
 }
-
-
-acCreateUser {
-}
