@@ -34,7 +34,11 @@ main()
   docker build --file "$baseDir"/base/Dockerfile.ubuntu2004 --tag irods-test-docker-ubuntu2004 \
     "$baseDir"
     
-  docker-compose --file "$baseDir"/docker-compose.yml --project-name "$ENV_NAME" build
+  if ! command -v docker-compose > /dev/null; then
+    docker compose --file "$baseDir"/docker-compose.yml --project-name "$ENV_NAME" build
+  else
+    docker-compose --file "$baseDir"/docker-compose.yml --project-name "$ENV_NAME" build
+  fi
 }
 
 
