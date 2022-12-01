@@ -30,6 +30,7 @@ export IRODS_DEFAULT_RESOURCE="$IRODS_RES_CONF_NAME"
 export IRODS_ADMIN_USER=rods
 export IRODS_ADMIN_PASSWORD=test_rods_password
 
+export DBMS_CONF_HOST="$ENV_NAME"_dbms_1."$DOMAIN"
 export IRODS_CONF_HOST="$ENV_NAME"_irods_1."$DOMAIN"
 
 export IRODS_VER="4.2.8"
