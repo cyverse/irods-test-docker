@@ -9,6 +9,8 @@
 #                      PostgreSQL.
 # DB_USER              The DBMS user iRODS will use to connect to DB_NAME DB.
 # DBMS_PORT            The TCP port the PostgreSQL will listen on.
+# IRODS_HOST           The FQDN or IP address of the server being
+#                       configured.
 # IRODS_RESOURCES      A list of unixfilesystem storage resource definitions.
 #                      See below.
 # IRODS_ZONE_NAME      The name of the iRODS zone.
@@ -43,7 +45,7 @@ main()
 
   printf 'Preparing %s\n' "$sqlData"
   mk_cfg_sql \
-      "$baseDir" "$IRODS_ZONE_NAME" "$IRODS_ADMIN_USER" "$IRODS_ADMIN_PASSWORD" "$IRODS_RESOURCES" \
+      "$baseDir" "$IRODS_HOST" "$IRODS_ZONE_NAME" "$IRODS_ADMIN_USER" "$IRODS_ADMIN_PASSWORD" "$IRODS_RESOURCES" \
     > "$sqlData"
 
   printf 'Starting PostgreSQL server\n'
@@ -71,12 +73,14 @@ escape_for_sed()
 
 expand_template()
 {
-  local zoneName="$1"
-  local zoneUser="$2"
-  local zonePasswd="$3"
-  local template="$4"
+  local hostName="$1"
+  local zoneName="$2"
+  local zoneUser="$3"
+  local zonePasswd="$4"
+  local template="$5"
 
   cat <<EOF | sed --file - "$template"
+s/HOST_NAME_TEMPLATE/$(escape_for_sed "$hostName")/g
 s/ZONE_NAME_TEMPLATE/$(escape_for_sed "$zoneName")/g
 s/ADMIN_NAME_TEMPLATE/$(escape_for_sed "$zoneUser")/g
 s/ADMIN_PASSWORD_TEMPLATE/$(escape_for_sed "$zonePasswd")/g
@@ -123,15 +127,16 @@ init_db()
 mk_cfg_sql()
 {
   local sqlDir="$1"
-  local zone="$2"
-  local admName="$3"
-  local admPasswd="$4"
-  local rescs="$5"
+  local host="$2"
+  local zone="$3"
+  local admName="$4"
+  local admPasswd="$5"
+  local rescs="$6"
 
   local nowTs=$(date '+%s');
 
   cat "$sqlDir"/sys-values.sql
-  expand_template "$zone" "$admName" "$admPasswd" "$sqlDir"/config-values.sql.template
+  expand_template "$host" "$zone" "$admName" "$admPasswd" "$sqlDir"/config-values.sql.template
 
   local id=9101
 

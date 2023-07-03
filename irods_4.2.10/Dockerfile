@@ -54,4 +54,7 @@ RUN /tmp/prep-svc-script
 ### Install iRODS Rules
 COPY irods_4.2.10/rules/pre-config.re /etc/irods/
 
+RUN mkdir /repl1 /repl2
+RUN chown irods:irods /repl1 /repl2
+
 CMD [ "/service.sh" ]

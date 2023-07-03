@@ -7,6 +7,7 @@ services:
       context: .
       dockerfile: postgresql/Dockerfile
       args:
+        IRODS_HOST: "$IRODS_CONF_HOST"
         IRODS_RESOURCES: "$IRODS_RES_CONF_NAME:$IRODS_CONF_HOST:$IRODS_VAULT"
         IRODS_ZONE_NAME: "$IRODS_ZONE_NAME"
         DB_NAME: "$DB_NAME"
