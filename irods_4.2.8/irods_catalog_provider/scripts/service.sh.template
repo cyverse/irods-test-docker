@@ -1,0 +1,56 @@
+#! /bin/bash
+#
+# Usage:
+#  service (start|stop)
+#
+# This script starts or stops a catalog service provider inside the container if 
+# there is one.
+#
+# It requires the following environment variable to be defined.
+#
+# IRODS_SYSTEM_USER  the system user who executes iRODS
+#
+# If there is a provider inside the container when it starts, the following
+# additional environment variables need to be defined.
+#
+# DBMS_HOST            The FQDN or IP address of the PostgreSQL server
+# DBMS_PORT            The TCP port the PostgreSQL will listen on.
+# IRODS_SYSTEM_GROUP   The default group of the service account
+# IRODS_SYSTEM_USER    The system user for the iRODS process
+# IRODS_ADMIN_PASSWORD  The password used to authenticate the clerver user
+
+
+
+set -e
+
+echo "Waiting for iRODS catalog database $DBMS_HOST to be ready"
+
+until /usr/pgsql-12/bin/pg_isready -h $DBMS_HOST -p $DBMS_PORT -d ICAT -U irods -q
+do
+    sleep 1
+done
+
+echo "iRODS catalog database is ready"
+
+
+# Ensure that the correct user owns everything in /var/lib/irods and /etc/irods
+# If this isn't done, some of the ansible ownership tests will fail.
+if [ -e /var/lib/irods/.irods/irods_environment.json ]
+then
+  chown --recursive "$IRODS_SYSTEM_USER":"$IRODS_SYSTEM_GROUP" /etc/irods /var/lib/irods
+
+  if ! su --command '/var/lib/irods/irodsctl start' --login "$IRODS_SYSTEM_USER"
+  then
+    cat /var/lib/irods/log/rodsLog* >&2
+    return 1
+  fi
+
+  touch /var/lock/subsys/irods
+
+  printf 'Authenticating clerver user\n'
+  su --command "iinit '$IRODS_ADMIN_PASSWORD'" --login "$IRODS_SYSTEM_USER"
+
+  printf 'iRODS catalog service provider started\n'
+
+  sleep 600000
+fi
