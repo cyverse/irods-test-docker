@@ -18,16 +18,7 @@ docker compose up -d
 docker compose down
 ```
 
-## Catalog Configurations
-
-| Variable                     | Value                                             |
-|------------------------------|---------------------------------------------------|
-| DB_TYPE                      | PostgreSQL 12                                     |
-| DB_NAME                      | ICAT                                              |
-| DB_USER                      | irods                                             |
-| DB_PASSWORD                  | testpassword                                      |
-
-## iRODS Configurations
+## Configurations
 
 | Variable                     | Value                                             |
 |------------------------------|---------------------------------------------------|
