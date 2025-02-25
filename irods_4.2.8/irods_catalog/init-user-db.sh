@@ -721,7 +721,7 @@ psql -v ON_ERROR_STOP=1 --username "irods" --dbname "ICAT" <<-EOSQL
     insert into R_OBJT_ACCESS values (9029,9011,1200,'1170000000','1170000000');
     insert into R_OBJT_ACCESS values (9030,9011,1200,'1170000000','1170000000');
 
-    insert into R_RESC_MAIN (resc_id, resc_name, zone_name, resc_type_name, resc_class_name,  resc_net, resc_def_path, free_space, free_space_ts, resc_info, r_comment, resc_status, create_ts, modify_ts) values (10000, 'replResc', 'tempZone', 'replication', 'cache', 'EMPTY_RESC_HOST', 'EMPTY_RESC_PATH', '', '', '', '', '', '1170000000','1170000000');
+    insert into R_RESC_MAIN (resc_id, resc_name, zone_name, resc_type_name, resc_class_name,  resc_net, resc_def_path, free_space, free_space_ts, resc_info, r_comment, resc_status, create_ts, modify_ts) values (10000, 'demoResc', 'tempZone', 'replication', 'cache', 'EMPTY_RESC_HOST', 'EMPTY_RESC_PATH', '', '', '', '', '', '1170000000','1170000000');
     insert into R_RESC_MAIN (resc_id, resc_name, zone_name, resc_type_name, resc_class_name,  resc_net, resc_def_path, free_space, free_space_ts, resc_info, r_comment, resc_status, create_ts, modify_ts, resc_parent) values (10001, 'replResc1', 'tempZone', 'unixfilesystem', 'cache', 'localhost', '/repl1', '', '', '', '', '', '1170000000','1170000000', 10000);
     insert into R_RESC_MAIN (resc_id, resc_name, zone_name, resc_type_name, resc_class_name,  resc_net, resc_def_path, free_space, free_space_ts, resc_info, r_comment, resc_status, create_ts, modify_ts, resc_parent) values (10002, 'replResc2', 'tempZone', 'unixfilesystem', 'cache', 'localhost', '/repl2', '', '', '', '', '', '1170000000','1170000000', 10000);
 
