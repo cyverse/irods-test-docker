@@ -1,4 +1,4 @@
-name: irods-test-docker-4.2.8
+name: irods-test-docker-4-2-8
 
 services:
     irods-catalog:
