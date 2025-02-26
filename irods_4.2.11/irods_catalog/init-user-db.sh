@@ -680,7 +680,7 @@ psql -v ON_ERROR_STOP=1 --username "irods" --dbname "ICAT" <<-EOSQL
     insert into R_SPECIFIC_QUERY (alias, sqlStr, create_ts) values ('lsl', 'select alias, sqlStr from R_SPECIFIC_QUERY where sqlStr like ?', '01292940000');
     insert into R_SPECIFIC_QUERY (alias, sqlStr, create_ts) values ('ShowCollAcls', 'select distinct R_USER_MAIN.user_name, R_USER_MAIN.zone_name, R_TOKN_MAIN.token_name, R_USER_MAIN.user_type_name from R_USER_MAIN, R_TOKN_MAIN, R_OBJT_ACCESS, R_COLL_MAIN where R_OBJT_ACCESS.object_id = R_COLL_MAIN.coll_id AND R_COLL_MAIN.coll_name = ? AND R_TOKN_MAIN.token_namespace = ''access_type'' AND R_USER_MAIN.user_id = R_OBJT_ACCESS.user_id AND R_OBJT_ACCESS.access_type_id = R_TOKN_MAIN.token_id', '01342019000');
 
-    insert into R_ZONE_MAIN values (9000,'localhost','local','','','1170000000','1170000000');
+    insert into R_ZONE_MAIN values (9000,'tempZone','local','','','1170000000','1170000000');
 
     insert into R_USER_MAIN values (9001,'rodsadmin','rodsgroup','tempZone','','','1170000000','1170000000');
     insert into R_USER_MAIN values (9002,'public','rodsgroup','tempZone','','','1170000000','1170000000');
@@ -724,6 +724,4 @@ psql -v ON_ERROR_STOP=1 --username "irods" --dbname "ICAT" <<-EOSQL
     insert into R_RESC_MAIN (resc_id, resc_name, zone_name, resc_type_name, resc_class_name,  resc_net, resc_def_path, free_space, free_space_ts, resc_info, r_comment, resc_status, create_ts, modify_ts) values (10000, 'demoResc', 'tempZone', 'replication', 'cache', 'EMPTY_RESC_HOST', 'EMPTY_RESC_PATH', '', '', '', '', '', '1170000000','1170000000');
     insert into R_RESC_MAIN (resc_id, resc_name, zone_name, resc_type_name, resc_class_name,  resc_net, resc_def_path, free_space, free_space_ts, resc_info, r_comment, resc_status, create_ts, modify_ts, resc_parent) values (10001, 'replResc1', 'tempZone', 'unixfilesystem', 'cache', 'localhost', '/repl1', '', '', '', '', '', '1170000000','1170000000', 10000);
     insert into R_RESC_MAIN (resc_id, resc_name, zone_name, resc_type_name, resc_class_name,  resc_net, resc_def_path, free_space, free_space_ts, resc_info, r_comment, resc_status, create_ts, modify_ts, resc_parent) values (10002, 'replResc2', 'tempZone', 'unixfilesystem', 'cache', 'localhost', '/repl2', '', '', '', '', '', '1170000000','1170000000', 10000);
-
-    insert into R_TOKN_MAIN values ('user_type', 10000, 'ucsb-irods-service', '', 'a UCSB iRODS service', '', '', '1170000000','1170000000');
 EOSQL
