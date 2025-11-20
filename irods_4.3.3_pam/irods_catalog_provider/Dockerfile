@@ -32,6 +32,7 @@ RUN apt-get update && \
 ARG irods_version=4.3.3
 ARG irods_package_version=${irods_version}-0~noble
 ARG irods_resource_plugin_version=4.3.3.0-0+${irods_version}~noble
+ARG irods_auth_plugin_pam_interactive_version=0.1.1-0+${irods_version}~noble
 
 RUN apt-get update && \
     apt-get install -y \
@@ -39,6 +40,8 @@ RUN apt-get update && \
         irods-runtime=${irods_package_version} \
         irods-server=${irods_package_version} \
         irods-resource-plugin-s3=${irods_resource_plugin_version} \
+        irods-auth-plugin-pam-interactive-server=${irods_auth_plugin_pam_interactive_version} \
+        irods-auth-plugin-pam-interactive-client=${irods_auth_plugin_pam_interactive_version} \
         irods-icommands=${irods_package_version} \
     && \
     apt-get clean && \
@@ -46,6 +49,10 @@ RUN apt-get update && \
 
 COPY unattended_install.json /
 COPY s3.keypair /var/lib/irods/
+COPY dhparams.pem /etc/irods/
+COPY server.key /etc/irods/
+COPY chain.pem /etc/irods/
+RUN chmod -R u+r /etc/irods/
 
 WORKDIR /
 COPY firstrun.sh .
