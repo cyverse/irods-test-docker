@@ -8,7 +8,7 @@
     },
     "service_account_environment": {
         "irods_client_server_negotiation": "request_server_negotiation",
-        "irods_client_server_policy": "CS_NEG_REQUIRE",
+        "irods_client_server_policy": "CS_NEG_REFUSE",
         "irods_connection_pool_refresh_time_in_seconds": 300,
         "irods_cwd": "/tempZone/home/rods",
         "irods_default_hash_scheme": "SHA256",
